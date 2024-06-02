@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo Mind: Neighborhood Bulletin Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #b3e0ff, #99ff99); /* Light blue to light green gradient */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* White background for container with opacity */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #003366; /* Deep blue underline */
+            padding-bottom: 10px; /* Add some space between title and underline */
+            margin-bottom: 20px; /* Add some space below the title */
+        }
+
+        #posts {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post {
+            background-color: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 85px); /* Adjusted for button width and padding */
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px; /* Rounded corners on left side */
+        }
+
+        button[type="submit"] {
+            width: 75px;
+            padding: 8px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0; /* Rounded corners on right side */
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #suggestion-box {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Echo Mind: Neighborhood Bulletin Board</h1>
+        <ul id="posts">
+            <!-- Posts will be dynamically added here -->
+        </ul>
+        <form id="post-form">
+            <input type="text" id="post-input" placeholder="Type your message...">
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+    <div id="suggestion-box" class="container">
+        <h2>Suggestion Box</h2>
+        <form id="suggestion-form">
+            <input type="text" id="suggestion-input" placeholder="Type your suggestion...">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const postForm = document.getElementById('post-form');
+            const postInput = document.getElementById('post-input');
+            const postsList = document.getElementById('posts');
+
+            postForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const message = postInput.value.trim();
+                if (message !== '') {
+                    addPost(message);
+                    postInput.value = '';
+                }
+            });
+
+            function addPost(message) {
+                const postItem = document.createElement('li');
+                postItem.className = 'post';
+                postItem.textContent = message;
+                postsList.appendChild(postItem);
+            }
+
+            const suggestionForm = document.getElementById('suggestion-form');
+            const suggestionInput = document.getElementById('suggestion-input');
+
+            suggestionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const suggestion = suggestionInput.value.trim();
+                if (suggestion !== '') {
+                    alert('Thank you for your suggestion:');
+                    suggestionInput.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
